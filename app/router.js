@@ -2,17 +2,17 @@ import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 import setupCustomRoutes from 'ares-webportal/custom-routes';
 
-const Router = EmberRouter.extend({
-  location: config.locationType,
-  rootURL: config.rootURL,
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
     
  init() {
-      this._super(...arguments);
+      super.init();
       this.on('routeDidChange', function() {
         window.scrollTo(0, 0);
       });
     }
-});
+}
 
 Router.map(function() {
   this.route('home', { path: ''});
@@ -32,6 +32,9 @@ Router.map(function() {
   this.route('chargen');
   this.route('chargen-review');
   this.route('chat');
+  this.route('channels-manage');
+  this.route('channel-create');
+  this.route('channel-edit', { path: '/channel-edit/:id' });
   this.route('client');
   this.route('combat', { path: '/combat/:id' });
   this.route('combat-log', { path: '/combat/:id/log' });
@@ -134,5 +137,3 @@ Router.map(function() {
 
   this.route('not-found', { path: '*:' });
 });
-
-export default Router;
