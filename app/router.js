@@ -1,5 +1,5 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
+import config from 'ares-webportal/config/environment';
 import setupCustomRoutes from 'ares-webportal/custom-routes';
 
 export default class Router extends EmberRouter {
@@ -30,7 +30,8 @@ Router.map(function() {
   this.route('char-edit', { path: '/char/:id/edit' });
   this.route('char-source', { path: '/char/:char_id/source/:version_id' });
   this.route('chargen');
-  this.route('chargen-review');
+  this.route('chargen-char', { path: '/chargen/:char_id'});
+  this.route('chargen-review', { path: '/chargen-review/:char_id'});
   this.route('chat');
   this.route('channels-manage');
   this.route('channel-create');
@@ -50,12 +51,16 @@ Router.map(function() {
   this.route('event-edit', { path: '/event/:event_id/edit'} );
   this.route('event-create', { path: '/event/create' } );
   this.route('files');
+  this.route('folder', { path: '/file/:folder' });
   this.route('file', { path: '/file/:folder/:name' });
   this.route('file-edit', { path: '/file/edit/:folder/:name' });
   this.route('forum');
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
   this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
+  this.route('forum-create');
+  this.route('forum-edit', { path: '/forum-edit/:id' });
+  this.route('forum-manage');
   this.route('fs3-limits');
   this.route('fs3-xp-costs');
   this.route('fs3combat-gear', { path: '/fs3combat/gear/' });
@@ -69,6 +74,9 @@ Router.map(function() {
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
   this.route('job-create');
+  this.route('jobcat-create');
+  this.route('jobcat-edit', { path: '/jobcat-edit/:id' });
+  this.route('jobcat-manage');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
   this.route('location-edit', { path: '/location/:id/edit'});
@@ -123,7 +131,7 @@ Router.map(function() {
   this.route('wiki');
   this.route('wiki-page', { path: '/wiki/:id'});
   this.route('wiki-all', { path: '/wiki/all'});
-  this.route('wiki-create', { path: '/wiki/create', query_params: ['title']});
+  this.route('wiki-create', { path: '/wiki/create', query_params: ['title', 'category', 'template', 'tags']});
   this.route('wiki-edit', { path: '/wiki/:id/edit'});
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
