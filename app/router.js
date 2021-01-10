@@ -71,9 +71,11 @@ Router.map(function() {
   this.route('help');
   this.route('help-topic', { path: '/help/:topic' });
   this.route('help-override', { path: '/help/:topic/override' });
+  this.route('idle');
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
   this.route('job-create');
+  this.route('job-edit', { path: '/job/:id/edit' });
   this.route('jobcat-create');
   this.route('jobcat-edit', { path: '/jobcat-edit/:id' });
   this.route('jobcat-manage');
@@ -101,6 +103,7 @@ Router.map(function() {
   this.route('plugins-edit');
   this.route('recent-changes');
   this.route('register');
+  this.route('roles');
   this.route('roster');
   this.route('roster-claim', { path: '/roster/claim/:id' });
   this.route('routes');

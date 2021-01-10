@@ -1,4 +1,4 @@
-{{title 'Discussion Forum'}}
+{{page-title 'Discussion Forum'}}
 <h1>Discussion Forum</h1>
 
 <p>The forum enables MU-wide discussion topics, available in-game and on the web portal.</p>
@@ -61,11 +61,12 @@
         </td>
         <td>
             {{#if forum.last_activity}}
-              {{forum.last_activity.author}} 
-              {{if (eq forum.last_activity.type 'reply') 'replied to' 'posted'}}
+              {{char-icon-tiny char=forum.last_activity.author}} {{forum.last_activity.date}}
+              <br>
+              {{if (eq forum.last_activity.type 'reply') 'Replied to' 'Posted'}}
               <LinkTo @route="forum-topic" @models={{array forum.id forum.last_activity.id}}>{{forum.last_activity.subject}}</LinkTo>
-              <br>{{forum.last_activity.date}}
             {{/if}}
+            
         </td>
         <td>
           <a href="#" {{action 'hideCategory' forum true}}>

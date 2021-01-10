@@ -1,4 +1,4 @@
-{{title model.name}}
+{{page-title model.name}}
 <h1>Tag - {{model.name}}</h1>
 
 <h2>Pages</h2>
@@ -21,5 +21,13 @@
 <ul>
 {{#each model.content.chars as |char| }}
 <li><LinkTo @route="char" @model={{char.name}}>{{char.name}}</LinkTo></li>
+{{/each}}
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+{{#each model.content.events as |event| }}
+<li><LinkTo @route="event" @model={{event.id}}>{{event.title}}</LinkTo></li>
 {{/each}}
 </ul>

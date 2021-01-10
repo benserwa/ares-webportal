@@ -17,7 +17,7 @@ export default Controller.extend(AuthenticatedController, {
   confirmRemoveCombatant: false,
   combatLog: '',
     
-  pageTitle: computed(function() {
+  pageTitle: computed('model.id', function() {
     return `Combat ${this.get('model.id')}`;
   }),
     
@@ -125,6 +125,17 @@ export default Controller.extend(AuthenticatedController, {
           return;
         }
         this.addToCombat(name, type, false);            
+      },
+      combatHero: function() {
+        let api = this.gameApi;
+        api.requestOne('combatHero', { combat_id: this.get('model.id'), combatant_id: this.get('model.combatant_id') }, null)
+        .then( (response) => {
+          if (response.error) {
+            return;
+          }
+          this.set('model', response);
+          this.flashMessages.success('You spend a luck point to recover!');
+        });
       },
       joinCombat: function() {
         let name = this.get('currentUser.name')

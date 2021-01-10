@@ -25,12 +25,16 @@
     <li><a data-toggle="tab" href="#systemtraits">Traits</a></li>
   {{/if}}
   
+  {{#if rpgExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemrpg">Sheet</a></li>
+  {{/if}}
+  
   {{#if fateExtraInstalled}}
     <li><a data-toggle="tab" href="#systemfate">Sheet</a></li>
   {{/if}}
   
   {{#if char.siteinfo}}
-    <li><a data-toggle="tab" href="#systemsite">Site Info</a></li>
+    <li><a data-toggle="tab" href="#systemsite">Admin</a></li>
   {{/if}}
   
   <ProfileCustomTabs @char={{char}} @game={{game}} />
@@ -88,6 +92,10 @@
   
   {{#if traitsExtraInstalled}}
     <ProfileTraits @char={{char}} />
+  {{/if}}
+  
+  {{#if rpgExtraInstalled}}
+    <RpgProfile @char={{char}} />
   {{/if}}
   
   {{#if fateExtraInstalled}}

@@ -1,4 +1,4 @@
-{{title 'FS3 XP Costs'}}
+{{page-title 'FS3 XP Costs'}}
 
 <h1>FS3 XP Costs</h1>
 
@@ -45,6 +45,23 @@
 
 <tbody>
 {{#each-in model.fs3.xp_costs.background as |currentLevel xpCost| }}
+<tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
+{{/each-in}}
+</tbody>
+</table>
+
+
+<h2>Languages</h2>
+
+<table class="table table-striped">
+
+<thead>
+    <th>Current Level</th>
+    <th>Cost</th>
+</thead>
+
+<tbody>
+{{#each-in model.fs3.xp_costs.language as |currentLevel xpCost| }}
 <tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
 {{/each-in}}
 </tbody>

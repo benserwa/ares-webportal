@@ -113,6 +113,12 @@
             {{/if}}
     {{/each}}
 
+
+     {{#if commandResponse}}
+       <div class="scene-command">{{commandResponse}}</div>
+     {{/if}}
+     
+     
     </div>
 
     {{#if sceneAlerts}}
@@ -136,14 +142,12 @@
             <PoseOrder @poseOrder={{scene.pose_order}} @playerName={{playerName}} />
              
              <MarkdownEditor @text={{scenePose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
-
-             
            {{/if}}
    
 
        <div class="scene-controls">
          <div class="col col-sm-6 col-xs-12 scene-controls-right">
-             {{#if (not scene.completed)}}                
+             {{#if (and (not scene.completed) (not scene.reload_required))}} 
 
              <div class="pose-buttons">
                  <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
@@ -152,12 +156,12 @@
                  {{#if txtExtraInstalled}}
                    <LiveSceneTxt @scenePose={{scenePose}} @scene={{scene}} />
                  {{/if}}
-                
+                 
              <LiveSceneCustomScenepose @scenePose={{scenePose}} @scene={{scene}} />
              </div>
                 
              <div class="scene-pose-select">
-                 <PowerSelect @selected={{poseType}} @options={{poseTypes}} @searchField="title" @onchange={{action "poseTypeChanged"}} as |poseType|>
+                 <PowerSelect @selected={{poseType}} @options={{poseTypes}} @searchField="title" @onChange={{action "poseTypeChanged"}} as |poseType|>
                      {{poseType.title}}
                  </PowerSelect>
              </div>
@@ -194,7 +198,12 @@
                              
                              {{#if cookiesExtraInstalled}}
                                <LiveSceneCookies @scene={{scene}} />
-                             {{/if}}                             
+                             {{/if}}      
+                             
+                             {{#if rpgExtraInstalled}}
+                               <RpgLiveScene @scene={{scene}} />
+                             {{/if}}
+                                                    
                           
                              <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
                           
@@ -242,7 +251,7 @@
              </div>
              
              <div class="scene-char-select" >
-                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onchange={{action "poseCharChanged"}} as |poseChar|>
+                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
                      <CharIconTiny @char={{poseChar}} />
                  </PowerSelect>
              </div>
@@ -279,7 +288,7 @@
     <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{false}} @open={{selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut selectLocation) null}}>
         <p>Select a location from the list or type one into the bottom box.</p>
         <p>
-          <PowerSelect @selected={{newLocation}} @options={{locations}} @onchange={{action "locationSelected"}} as |location|>
+          <PowerSelect @selected={{newLocation}} @options={{locations}} @onChange={{action "locationSelected"}} as |location|>
         {{location}}
       </PowerSelect>
        <b>Custom Location:</b> <Input @type="text" @size={{25}} @id="newLocation" @enter={{action "changeLocation"}} @value={{newLocation}} />
